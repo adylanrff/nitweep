@@ -42,25 +42,19 @@ services:
 #       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
 #     networks:
 #       - internal
-#   api:
-#     container_name: api
-#     build:
-#       context: ./core
-#       dockerfile: Dockerfile
-#     restart: always
-#     expose:
-#       - 80
-#     environment:
-#       ASPNETCORE_ENVIRONMENT: 'Production'
-#       DB_CONNECTION_STRING: 'Server=postgres;Port=5432;Database=dotnetcoredocker;User Id=pguser;Password=pguserpass'
-#       TOKEN_HTTPS_META: 'true'
-#       TOKEN_AUDIENCE: 'https://dotnetcoredocker.com'
-#       TOKEN_ISSUER: 'https://api.dotnetcoredocker.com'
-#     depends_on:
-#       - postgres
-#     networks:
-#       - internal
-#       - web
+  api:
+    container_name: api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - 80
+    env_file:
+      - config/.env
+    networks:
+      - internal
+      - web
   frontend:
     container_name: frontend
     build:
