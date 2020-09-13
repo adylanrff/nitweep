@@ -64,7 +64,7 @@ services:
   frontend:
     container_name: frontend
     build:
-      context: ./nitweep-frontend
+      context: ./frontend
       dockerfile: Dockerfile
     restart: always
     expose:
